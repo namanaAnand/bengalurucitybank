@@ -1,0 +1,230 @@
+{% extends 'profiles/profile_base_layout.html' %}
+
+{% block headcontent %}
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Cinzel|PT+Serif');
+        
+        body {
+            background-color: floralwhite;
+        }
+        h2 {
+            font-family: "PT Serif";
+        }
+
+        #side_panel
+        {
+            font-size: 16px;
+            font-family: "Titillium Web";
+            background-color: rgb(170, 95, 57);
+            margin-top: -7px;
+            margin-left: -10px;
+            height: 540px;
+            overflow-x: auto;
+            overflow-y: auto;
+        }
+        
+        .side {
+            color: aliceblue;
+        }
+        .side:hover {
+            color: mediumaquamarine;
+        }
+        .warning {
+            color: yellow;
+        }
+        .danger {
+            color: #FF8723;
+            font-weight: 900;
+        }
+        .current {
+            border: 1px solid;
+            padding: 3px;
+        }
+        .curr_bal {
+            font-family: "Cinzel";
+            font-weight: 600;
+        }
+        
+        #side_panel::-webkit-scrollbar {
+            width: 7px;
+        }
+        #side_panel::-webkit-scrollbar:hover {
+            width: 12px;
+        }
+        #side_panel::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 3px rgba(0,0,0,0.3);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+        }
+    </style>
+{% endblock %}
+        
+{% block bodycontent %}
+<head>
+
+                <!-- <meta name="viewport" content="width=device-width, initial-scale=1">
+                <style>
+                /* Style all input fields */
+                input {
+                  width: 100%;
+                  padding: 12px;
+                  border: 1px solid #ccc;
+                  border-radius: 4px;
+                  box-sizing: border-box;
+                  margin-top: 6px;
+                  margin-bottom: 16px;
+                }
+                
+                /* Style the submit button */
+                input[type=submit] {
+                  background-color: #4CAF50;
+                  color: white;
+                }
+                
+                /* Style the container for inputs */
+                .container {
+                  background-color: #f1f1f1;
+                  padding: 20px;
+                }
+                
+                /* The message box is shown when the user clicks on the password field */
+                #message {
+                  display:none;
+                  background: #f1f1f1;
+                  color: #000;
+                  position: relative;
+                  padding: 20px;
+                  margin-top: 10px;
+                }
+                
+                #message p {
+                  padding: 10px 35px;
+                  font-size: 18px;
+                }
+                
+                /* Add a green text color and a checkmark when the requirements are right */
+                .valid {
+                  color: green;
+                }
+                
+                .valid:before {
+                  position: relative;
+                  left: -35px;
+                  content: "✔";
+                }
+                
+                /* Add a red text color and an "x" when the requirements are wrong */
+                .invalid {
+                  color: red;
+                }
+                
+                .invalid:before {
+                  position: relative;
+                  left: -35px;
+                  content: "✖";
+                }
+                </style> 
+ -->
+
+            
+
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  </head>
+    <section id="welcome_post" class="col-9">
+        <h2>Welcome, <span id="prof_name">{{ user }}.</span> </h2>
+        <h4 style="font-weight: 300;">It's good to have you here.</h4>   
+
+        <form action="{ url 'profiles:money_transfer' }" method="post">
+            {% csrf_token %}
+
+            <h3 style="font-weight: 300;">
+                {{ form }}
+            </h3>
+			<form>
+
+                    <!-- <div class="container">
+                            <form action="/action_page.php">
+                          
+                              <label for="psw">OTP</label>
+                              <input type="password" id="psw" name="psw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+                              
+                              
+                            </form>
+                          </div>
+
+                          <div id="message">
+                                
+                                <p id="letter" class="invalid"> <b>Yeah correct</b> </p>
+                                <p id="capital" class="invalid"> <b>two more</b> Correct</p>
+                              </div> -->
+                                      
+                <div class="form_container">
+                    <form action="#" id="my_captcha_form">
+                      <div class="g-recaptcha" 
+                  data-sitekey="6LfrFKQUAAAAAMzFobDZ7ZWy982lDxeps8cd1I2i" 
+                  ></div> </form>
+
+                  <!-- <body>
+                        <script>
+                                var myInput = document.getElementById("psw");
+                                var letter = document.getElementById("letter");
+                                var capital = document.getElementById("capital");
+                                
+                                // When the user clicks on the password field, show the message box
+                                myInput.onfocus = function() {
+                                  document.getElementById("message").style.display = "block";
+                                }
+                                
+                                // When the user clicks outside of the password field, hide the message box
+                                myInput.onblur = function() {
+                                  document.getElementById("message").style.display = "none";
+                                }
+                                
+                                // When the user starts to type something inside the password field
+                                myInput.onkeyup = function() {
+                                  // Validate lowercase letters
+                                  var lowerCaseLetters = /[4-6]/g;
+                                  if(myInput.value.match(lowerCaseLetters)) {  
+                                    letter.classList.remove("invalid");
+                                    letter.classList.add("valid");
+                                  } else {
+                                    letter.classList.remove("valid");
+                                    letter.classList.add("invalid");
+                                  }
+                                  
+                                  // Validate capital letters
+                                  var upperCaseLetters = /[7-8]/g;
+                                  if(myInput.value.match(upperCaseLetters)) {  
+                                    capital.classList.remove("invalid");
+                                    capital.classList.add("valid");
+                                  } else {
+                                    capital.classList.remove("valid");
+                                    capital.classList.add("invalid");
+                                  }
+                                
+                                  
+                                }
+                                </script>
+                                
+                  </body>
+                 -->
+  
+            
+            <small>By transferring money from your account, you agree to the <a href="#">Terms and Conditions</a> of amount transfer</small>. <br>
+            <button type="submit" class="btn btn-primary">Transfer amount</button>
+        </form>
+    </section>
+{% endblock %}
+
+{% block scriptcontent %}
+    <script>
+        $(".current").removeClass("current");
+        $("#transfer").addClass("current");
+
+        $("input").addClass("form-control");
+        $("label").prepend("<br>")
+    </script>
+{% endblock %}
