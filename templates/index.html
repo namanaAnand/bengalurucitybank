@@ -1,0 +1,40 @@
+{% extends 'base_layout.html' %}
+
+{% block stylecontent %}
+    <style>
+        h1 {
+            border-bottom: 1px solid;
+        }
+        h4 {
+            font-weight: 400;
+        }
+        a:hover {
+            text-decoration: none;
+        }
+        
+        .foot {
+            position: absolute;
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
+        }
+    </style>
+{% endblock %}
+        
+
+{% block bodycontent %}    
+    <div class="container text-center">
+        <h1>Welcome to Bengaluru City Bank</h1>
+        <h4><em>The Bengaluru City Bank (BCB) is an Indian multinational, public sector banking and financial services statutory body. It is a government corporation statutory body headquartered in Mumbai, Maharashtra. BCB is ranked as 216th in the Fortune Global 500 list of the world's biggest corporations of 2018. It is the largest bank in India with a 23% market share in assets, besides a share of one-fourth of the total loan and deposits market. </em></h4>
+    </div>
+    
+    <br>
+    
+    <div class="container">
+        <a href="{% url 'accounts:signup' %}"><button class="btn btn-warning btn-block" id="acc"><i class="fa fa-file-text"></i> Create new account</button></a>
+        <br> 
+        <a href="{% url 'accounts:signin' %}"><button class="btn btn-success btn-block" id="sign_in"><i class="fa fa-sign-in"></i> Sign in</button></a>
+    </div>
+    
+    <br>
+{% endblock %}
